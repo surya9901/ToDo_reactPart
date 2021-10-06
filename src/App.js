@@ -88,11 +88,11 @@ function App() {
                   return (
                     <li className="taskDisplay_div list-group-item">
                       <div className="liTaskDisplay">
-                        <input className="form-check-input me-1" checked={data.status} type="checkbox" value="" aria-label="..." onChange={(e) => handleChange(e, data.id)} />
+                        <input className="form-check-input me-1" checked={data.status} type="checkbox" value="" aria-label="..." onChange={(e) => handleChange(e, data._id)} />
                         <span style={{ textDecoration: data.status ? "line-through" : "" }}>{data.message}</span>
                       </div>
                       <div className="deleteButton_div">
-                        <span className="badge bg-danger rounded-pill" onClick={() => handleDelete(data.id)}>X</span>
+                        <span className="badge bg-danger rounded-pill" onClick={() => handleDelete(data._id)}>X</span>
                       </div>
                     </li>
                   )
