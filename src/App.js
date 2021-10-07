@@ -13,6 +13,7 @@ function App() {
   // this is used to get the data from the input box
   const [task, setTask] = useState("")
 
+
   // useEffect is used to render the data on load/Intializing of the page  
   useEffect(async () => {
     fetchTaskList()
@@ -22,7 +23,7 @@ function App() {
   let fetchTaskList = async () => {
     try {
       // using axios package to fetch the data 
-      let todo_data = await axios.get("http://localhost:3000/list-all-todo")
+      let todo_data = await axios.get("https://suryastodoapp.herokuapp.com/list-all-todo")
 
       // this is a hook used to store the data in the todo variable
       setToDo([...todo_data.data])
@@ -37,7 +38,7 @@ function App() {
   // Api call to post the data into the server
   let handlecreate = async () => {
     try {
-      let postData = await axios.post("http://localhost:3000/create-task", { message: task })
+      let postData = await axios.post("https://suryastodoapp.herokuapp.com/create-task", { message: task })
 
       // calling the get method to display the data in DOM
       fetchTaskList()
@@ -52,7 +53,7 @@ function App() {
 
   let handleChange = async (e, id) => {
     try {
-      let updateData = await axios.put(`http://localhost:3000/update-task/${id}`, { status: e.target.checked })
+      let updateData = await axios.put(`https://suryastodoapp.herokuapp.com/update-task/${id}`, { status: e.target.checked })
       fetchTaskList()
     }
     catch (error) {
@@ -63,7 +64,7 @@ function App() {
   let handleDelete = async (id) => {
     try {
       // alert(id)
-      let deleteData = await axios.delete(`http://localhost:3000/delete-task/${id}`)
+      let deleteData = await axios.delete(`https://suryastodoapp.herokuapp.com/delete-task/${id}`)
       fetchTaskList()
     } catch (error) {
       console.log(error)
