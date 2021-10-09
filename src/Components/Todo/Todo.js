@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Todo.css';
+import env from '../settings';
 
 function Todo() {
     // this is used to store the data receiving from the server 
@@ -22,7 +23,7 @@ function Todo() {
     let fetchTaskList = async () => {
         try {
             // using axios package to fetch the data 
-            let todo_data = await axios.get("https://suryastodoapp.herokuapp.com/list-all-todo")
+            let todo_data = await axios.get(`${env.api}/list-all-todo`)
 
             // this is a hook used to store the data in the todo variable
             setToDo([...todo_data.data])
@@ -37,7 +38,7 @@ function Todo() {
     // Api call to post the data into the server
     let handlecreate = async () => {
         try {
-            let postData = await axios.post("https://suryastodoapp.herokuapp.com/create-task", { message: task })
+            let postData = await axios.post(`${env.api}/create-task`, { message: task })
 
             // calling the get method to display the data in DOM
             fetchTaskList()
@@ -52,7 +53,7 @@ function Todo() {
 
     let handleChange = async (e, id) => {
         try {
-            let updateData = await axios.put(`https://suryastodoapp.herokuapp.com/update-task/${id}`, { status: e.target.checked })
+            let updateData = await axios.put(`${env.api}/update-task/${id}`, { status: e.target.checked })
             fetchTaskList()
         }
         catch (error) {
@@ -63,7 +64,7 @@ function Todo() {
     let handleDelete = async (id) => {
         try {
             // alert(id)
-            let deleteData = await axios.delete(`https://suryastodoapp.herokuapp.com/delete-task/${id}`)
+            let deleteData = await axios.delete(`${env.api}/delete-task/${id}`)
             fetchTaskList()
         } catch (error) {
             console.log(error)
