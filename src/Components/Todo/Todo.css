@@ -1,18 +1,22 @@
 .Container {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .row > h4 {
-    margin-bottom: 20px;
-  }
-  
-  .taskDisplay_div {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .deleteButton_div:hover {
-    cursor: pointer;
-  }
-  
+  display: flex;
+  justify-content: center;
+}
+
+.todo__head > h4 {
+  margin-top: 4px;
+}
+
+.taskDisplay_div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.deleteButton_div:hover {
+  cursor: pointer;
+}
+
+.todo__head {
+  display: flex;
+  justify-content: space-between;
+}

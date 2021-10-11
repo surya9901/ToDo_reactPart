@@ -14,3 +14,8 @@
   display: flex;
   justify-content: center;
 }
+
+.registerlink > a {
+  text-decoration: none;
+  color: black;
+}

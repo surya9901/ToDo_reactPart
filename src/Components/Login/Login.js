@@ -3,20 +3,23 @@ import React, { useState } from 'react'
 import login from './login.png';
 import env from '../settings';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 function Login() {
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
-
+    let history = useHistory();
     let handlesubmit = async (e) => {
         e.preventDefault();
         try {
             let loginData = await axios.post(`${env.api}/login`, { userName, password })
             console.log(loginData);
-            alert(loginData.data.message);
+            window.localStorage.setItem("app_token", loginData.data.token)
+            history.push("/todo")
         }
         catch (error) {
             console.error();
+            alert("Wrong password!");
         }
     }
 
@@ -35,6 +38,9 @@ function Login() {
                 <div className="form-floating mt-2">
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="form-control" id="floatingPassword" placeholder="Password" required />
                     <label for="floatingPassword">Password</label>
+                </div>
+                <div className="registerlink mt-2">
+                    <a href={"./register"}>New user? Click here</a>
                 </div>
                 <input className="w-100 btn btn-lg btn-primary mt-3" type="submit" value="Sign in" />
                 <p className="mt-3 mb-3 text-muted">© Surya's Todo</p>

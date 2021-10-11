@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Todo.css';
 import env from '../settings';
+import { useHistory } from 'react-router-dom';
 
 function Todo() {
     // this is used to store the data receiving from the server 
@@ -13,6 +14,8 @@ function Todo() {
     // this is used to get the data from the input box
     const [task, setTask] = useState("")
 
+    let history = useHistory();
+
 
     // useEffect is used to render the data on load/Intializing of the page  
     useEffect(async () => {
@@ -23,7 +26,11 @@ function Todo() {
     let fetchTaskList = async () => {
         try {
             // using axios package to fetch the data 
-            let todo_data = await axios.get(`${env.api}/list-all-todo`)
+            let todo_data = await axios.get(`${env.api}/list-all-todo`, {
+                headers: {
+                    "Authorization": window.localStorage.getItem("app_token")
+                }
+            })
 
             // this is a hook used to store the data in the todo variable
             setToDo([...todo_data.data])
@@ -38,7 +45,11 @@ function Todo() {
     // Api call to post the data into the server
     let handlecreate = async () => {
         try {
-            let postData = await axios.post(`${env.api}/create-task`, { message: task })
+            let postData = await axios.post(`${env.api}/create-task`, { message: task }, {
+                headers: {
+                    "Authorization": window.localStorage.getItem("app_token")
+                }
+            })
 
             // calling the get method to display the data in DOM
             fetchTaskList()
@@ -53,7 +64,11 @@ function Todo() {
 
     let handleChange = async (e, id) => {
         try {
-            let updateData = await axios.put(`${env.api}/update-task/${id}`, { status: e.target.checked })
+            let updateData = await axios.put(`${env.api}/update-task/${id}`, { status: e.target.checked }, {
+                headers: {
+                    "Authorization": window.localStorage.getItem("app_token")
+                }
+            })
             fetchTaskList()
         }
         catch (error) {
@@ -64,7 +79,11 @@ function Todo() {
     let handleDelete = async (id) => {
         try {
             // alert(id)
-            let deleteData = await axios.delete(`${env.api}/delete-task/${id}`)
+            let deleteData = await axios.delete(`${env.api}/delete-task/${id}`, {
+                headers: {
+                    "Authorization": window.localStorage.getItem("app_token")
+                }
+            })
             fetchTaskList()
         } catch (error) {
             console.log(error)
@@ -73,7 +92,16 @@ function Todo() {
     return (
         <div className="Container">
             <div className="row mt-2">
-                <h4>Add Task:</h4>
+                <div className="todo__head col-lg-8 mb-3">
+                    <h4>Add Task:</h4>
+                    <span>
+                        <button className="btn btn-primary" onClick={() => {
+                            window.localStorage.removeItem("app_token");
+                            history.push("/login")
+                        }}>Logout
+                        </button>
+                    </span>
+                </div>
                 <div className="input_div col-lg-8">
                     <div className="input-group mb-3">
                         <input type="text" className="form-control" value={task} onChange={(e) => setTask(e.target.value)} placeholder="Type Here..." aria-label="Recipient's username" aria-describedby="button-addon2" />
