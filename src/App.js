@@ -17,7 +17,7 @@ function App() {
           <Route path="/Todo">
             <Todo />
           </Route>
-          <Route path="">
+          <Route path="/Register">
             <Register />
           </Route>
           <Route path="/Login">
