@@ -78,7 +78,6 @@ function Todo() {
 
     let handleDelete = async (id) => {
         try {
-            // alert(id)
             let deleteData = await axios.delete(`${env.api}/delete-task/${id}`, {
                 headers: {
                     "Authorization": window.localStorage.getItem("app_token")

@@ -13,7 +13,6 @@ function Login() {
         e.preventDefault();
         try {
             let loginData = await axios.post(`${env.api}/login`, { userName, password })
-            console.log(loginData);
             window.localStorage.setItem("app_token", loginData.data.token)
             history.push("/todo")
         }
