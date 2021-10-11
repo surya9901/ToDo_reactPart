@@ -14,7 +14,10 @@ function App() {
     <>
       <Router>
         <Switch>
-        <Route path="/">
+          <Route path="/">
+            <Register />
+          </Route>
+          <Route path="/Register">
             <Register />
           </Route>
           <Route path="/Todo">
