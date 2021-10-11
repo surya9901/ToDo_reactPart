@@ -14,18 +14,10 @@ function App() {
     <>
       <Router>
         <Switch>
-          <Route path="/">
-            <Register />
-          </Route>
-          <Route path="/Register">
-            <Register />
-          </Route>
-          <Route path="/Todo">
-            <Todo />
-          </Route>
-          <Route path="/Login">
-            <Login />
-          </Route>
+          <Route path="/" component={Register} exact={true}/>
+          <Route path="/Register" component={Register} exact={true}/>
+          <Route path="/Login" component={Login} exact={true}/>
+          <Route path="/Todo" component={Todo} exact={true}/>
         </Switch>
       </Router>
     </>
