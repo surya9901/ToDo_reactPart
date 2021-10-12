@@ -3,7 +3,7 @@ import register from './register.png'
 import React, { useState } from 'react'
 import axios from 'axios';
 import env from '../settings';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 function Register() {
     const [userName, setUserName] = useState("")
@@ -48,7 +48,7 @@ function Register() {
                     <label for="floatingPassword">Confirm Password</label>
                 </div>
                 <div className="loginlink mt-2">
-                    <a href={"./login"}>Already a user? Click here</a>
+                    <Link to="./login">Already a user? Click here</Link >
                 </div>
                 <input className="w-100 btn btn-lg btn-primary mt-3" type="submit" value="Sign up" />
                 <p className="mt-3 mb-3 text-muted">© Surya's Todo</p>

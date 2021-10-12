@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import login from './login.png';
 import env from '../settings';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 function Login() {
     const [userName, setUserName] = useState("");
@@ -39,7 +39,7 @@ function Login() {
                     <label for="floatingPassword">Password</label>
                 </div>
                 <div className="registerlink mt-2">
-                    <a href={"./register"}>New user? Click here</a>
+                    <Link to="./register">New user? Click here</Link>
                 </div>
                 <input className="w-100 btn btn-lg btn-primary mt-3" type="submit" value="Sign in" />
                 <p className="mt-3 mb-3 text-muted">© Surya's Todo</p>
